@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+    /* color: aliceblue; */
+    font-family: lato;
+}
+div#imagen{
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    background-image:url(../imagenes/comida-perros.jpg) ;
+    margin: 0px auto;
+}
+div#info{
+    position: absolute;
+    overflow: hidden;
+    width: 300px;
+    height: 200px;
+    background-color: rgba(31, 31,31,0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+div#imagen:hover div#info{
+    opacity: 1;
+}
+
+p#headline{
+    position: absolute;
+    font-size: 1.5rem;
+    margin-left: -75px;
+    margin-top: 15px;
+    transition: margin-left 0.3s;
+}
+div#imagen:hover p#headline{
+    margin-left: 115px;
+}
+p#descripcion{
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 200px;
+    transition: margin-top 0.4s;
+}
+div#imagen:hover p#descripcion{
+    margin-top: 75px;
+}
