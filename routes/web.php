@@ -12,16 +12,18 @@
         Route::resource('/product', 'ProductController');
         Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
         Route::resource('/admin/blog', 'BlogController');
+        Route::view('/users','user/users')->name('users');
     });
-
-
 
 
 
     Route::view('/profile','admin/profile')->name('profileadmin');
     Route::view('/blogAdmin','admin/blogAdmin')->name('blogAdmin');
-
     //FIN ADMINISTRADOR
+
+
+
+
     //vista de home menu rutas
     route::view('/perro','visitante/perro')->name('perro');
     route::view('/gato','visitante/gato')->name('gato');
