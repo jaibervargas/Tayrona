@@ -1,27 +1,27 @@
 <?php
 
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('welcome');
-    Auth::routes();
+
+    //no tocar rutas
+
+    Route::get('/', 'HomeController@home')->name('inicio');
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::group(['middleware' => ['auth','admin']], function (){
 
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
-
+    //Verificacion de email
+    Auth::routes(['verify' => true]);
+    Route::group(['middleware' => 'verified', 'auth'], function () {
+        Route::resource('/product', 'ProductController');
+        Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     });
+
+
+
+
 
     Route::view('/profile','admin/profile')->name('profileadmin');
     Route::view('/blogAdmin','admin/blogAdmin')->name('blogAdmin');
-    Route::resource('/product', 'ProductController');
 
-        //FIN ADMINISTRADOR
-
-
+    //FIN ADMINISTRADOR
     //vista de home menu rutas
-
     route::view('/perro','visitante/perro')->name('perro');
     route::view('/gato','visitante/gato')->name('gato');
     route::view('/otros','visitante/otros')->name('otros');

@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -24,10 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->usertype == 'admin') {
+        if(Auth::user()->role_id == '1') {
            return  redirect()->route('dashboard');
-        }else if(Auth::user()->usertype == 'admin') {
+        }else if(Auth::user()->role_id == '2') {
             return  redirect()->route('users');
         }
+    }
+
+    public function home()
+    {
+        return view('Invited/home');
+    }
+
+    public function dashboard()
+    {
+        return view('admin/dashboard');
     }
 }

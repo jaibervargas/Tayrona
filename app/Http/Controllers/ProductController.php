@@ -70,6 +70,8 @@ class ProductController extends Controller
         return view('admin/producteditar', compact('productactualizar'));
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *

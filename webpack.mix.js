@@ -13,4 +13,5 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-.styles(["node_modules/bootstrap/dist/css/bootstrap.css"],"public/css/mail.css");
+    .styles(["node_modules/bootstrap/dist/css/bootstrap.css",
+            "resource/css/main.css"],"public/css/styles.css");

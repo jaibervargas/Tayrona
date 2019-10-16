@@ -1,0 +1,15 @@
+.bg-orange {
+    background: #FE7A00 !important;
+}
+
+
+.btn-orange{
+    background: #FE7A00 !important;
+    color:white;
+    outline: #FE7A00 !important ;
+
+}
+
+.bg-orange:focus{
+    outline: #FE7A00 !important ;
+}
