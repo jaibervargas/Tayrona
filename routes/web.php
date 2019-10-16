@@ -11,6 +11,7 @@
     Route::group(['middleware' => 'verified', 'auth'], function () {
         Route::resource('/product', 'ProductController');
         Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+        Route::resource('/admin/blog', 'BlogController');
     });
 
 
