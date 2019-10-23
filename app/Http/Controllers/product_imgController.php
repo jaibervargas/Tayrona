@@ -6,6 +6,7 @@ use App\product_img;
 use App\productos;
 use Faker\Provider\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class product_imgController extends Controller
 {
@@ -16,7 +17,7 @@ class product_imgController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -40,7 +41,11 @@ class product_imgController extends Controller
 
         $productimg = new product_img;
         $productimg ->product_id = $request->productid;
-        $productimg ->url = $request->file('avatar')->store('upload');
+        if ( $request->file('avatar')){
+            $path = Storage::disk('public')->put('upload', $request->file('avatar'));
+            $productimg->url = $path;
+        }
+
         $productimg->save();
 
         return back();

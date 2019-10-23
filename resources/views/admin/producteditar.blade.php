@@ -76,6 +76,11 @@
                         <i class="fa fa-plus">    New Image</i>
                     </a>
                 </div>
+                @foreach($img as $im)
+
+                    <img src="{{asset($im->url)}}" alt="" style="width:100px  ">
+                
+                 @endforeach
             </div>
         </div>
     </div>

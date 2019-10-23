@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\product_categorys;
+use App\product_img;
 use App\product_status;
 use Illuminate\Http\Request;
 use App\productos;
@@ -71,7 +72,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $productactualizar = productos::findOrFail($id);
-        return view('admin/producteditar', compact('productactualizar'));
+        $img = product_img::where('product_id', $id)->get();
+        return view('admin/producteditar', compact('productactualizar', 'img'));
     }
 
 
