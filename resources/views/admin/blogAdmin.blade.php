@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('theme.lte.master')
 
 @section('title')
     Tayrona Pet Shop

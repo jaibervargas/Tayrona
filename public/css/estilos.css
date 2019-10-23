@@ -221,7 +221,7 @@ label:hover ~ label {
 input[type="radio"]:checked ~ label {
   /* color: orange; */
   color:#571C7C;
-} 
+}
 .comentario{
   width: 75%;  height: 130px;
     color: black;
@@ -235,15 +235,15 @@ input[type="radio"]:checked ~ label {
 }
 
 .responder{
-  width:75%;  
+  width:75%;
   height:30px;
   border-width: 1px;
     border-style: solid;
     border-color: #571C7C;
 }
 .vermas{
-  width:80px; 
-  height:20px; 
+  width:80px;
+  height:20px;
   margin-left:40%;
   font-size: 18px;
   color: black;
@@ -255,13 +255,13 @@ input[type="radio"]:checked ~ label {
 }
 .vermas:hover{
   border-width: 3px;
-  
+
   color:#571C7C;
 }
 /*  */
 /* blog */
 .img-blog{
   float:left;
-}       
+}
 /* .segundo{clear:left;} */
 

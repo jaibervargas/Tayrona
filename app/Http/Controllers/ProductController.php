@@ -38,11 +38,12 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $productoagregar = new productos;
+        $productoagregar->product_status_id  = $request->estado;
+        $productoagregar->product_categorys_id  = $request->categorias;
+        $productoagregar->sub_categorys_id  = $request->subcategorias;
         $productoagregar->name = $request->name;
         $productoagregar->descripcion = $request->descripcion;
-        $productoagregar->categoria = $request->categoria;
         $productoagregar->precio = $request->precio;
-        $productoagregar->cantidad = $request->cantidad;
         $productoagregar->save();
         return back()->with('agregar','El producto se ha agregado');
     }
@@ -84,9 +85,8 @@ class ProductController extends Controller
         $productupdate = productos::findOrFail($id);
         $productupdate->name = $request->name;
         $productupdate->descripcion = $request->descripcion;
-        $productupdate->categoria = $request->categoria;
+        $productupdate->product_status_id  = $request->product_status_id ;
         $productupdate->precio = $request->precio;
-        $productupdate->cantidad = $request->cantidad;
         $productupdate->save();
         return back();
     }
