@@ -19,8 +19,6 @@ class CreateProductosTable extends Migration
             $table->foreign('product_status_id')->references('id')->on('product_status');
             $table->unsignedBigInteger('product_categorys_id');
             $table->foreign('product_categorys_id')->references('id')->on('product_categorys');
-            $table->unsignedBigInteger('sub_categorys_id');
-            $table->foreign('sub_categorys_id')->references('id')->on('sub_categorys');
             $table->string('name');
             $table->string('descripcion');
             $table->string('precio');

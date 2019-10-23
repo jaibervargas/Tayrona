@@ -25,7 +25,6 @@
                                 <th class="text-center">PRECIO</th>
                                 <th class="text-center">ESTADO</th>
                                 <th class="text-center" >CATEGORIAS</th>
-                                <th class="text-center" >SUB CATEGORIAS</th>
                                 <th class="text-center" >ACCIONES</th>
                             </tr>
                             </thead>
@@ -35,16 +34,15 @@
                                     <td class="text-center">{{$item->name}}</td>
                                     <td class="text-center">{{$item->descripcion}}</td>
                                     <td class="text-center">{{$item->precio}}</td>
-                                    <td class="text-center">{{$item->product_status_id}}</td>
-                                    <td class="text-center">{{$item->product_categorys_id}}</td>
-                                    <td class="text-center">{{$item->sub_categorys_id}}</td>
+                                    <td class="text-center">{{$item->product_status->name}}</td>
+                                    <td class="text-center">{{$item->product_categorys->name}}</td>
                                     <td class="td-actions text-center ">
                                         <a href="{{Route('product.edit',$item->id)}}"><button  type="button" data-toggle="tooltip" class="btn btn-round btn-group btn-success btn-icon" title="Modificar producto">
                                                 <i class="fa fa-fw fa-edit "></i>
                                             </button></a>
-                                        <form action="{{Route('product.destroy',$item->id)}}" method="post"  class="d-inline btn-group">
-                                            @method('delete')
+                                        <form action="{{Route('product.destroy',$item->id)}}" method="POST"  class="d-inline btn-group">
                                             @csrf
+                                            @method('DELETE')
                                             <button  type="submit" class="btn btn-round btn-danger btn-icon" data-toggle="tooltip" title="Eliminar producto">
                                                 <i class="fa fa-fw fa-trash "></i>
                                             </button>
@@ -93,29 +91,22 @@
                                 <label for="recipient-" class="col-form-label">Estado</label>
                                 <select name="estado" id="recipient-status" class="form-control" >
                                     <option value="" ></option>
-                                    <option value="1" >Activo</option>
-                                    <option value="2" >No Activo</option>
+                                    @foreach($status as $status)
+                                    <option value="{{$status->id}}" >{{$status->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-" class="col-form-label">categorias</label>
-                                <select name="categorias" id="recipient-status" class="form-control" >
-                                    <option value="" ></option>
-                                    <option value="1" >Perros</option>
-                                    <option value="2" >Gatos</option>
-                                    <option value="3" >Otras Mascotas</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="recipient-" class="col-form-label">sub categorias</label>
-                                <select name="subcategorias" id="recipient-status" class="form-control" >
-                                    <option value="" ></option>
-                                    <option value="1" >alimento</option>
-                                    <option value="2" >juguetes</option>
-                                    <option value="3" >remedios</option>
-                                    <option value="4" >Accesorios</option>
-                                </select>
-                            </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-" class="col-form-label">categorias</label>
+                                    <select name="categorias" id="recipient-status" class="form-control" >
+                                        <option></option>
+                                        @foreach($categoria as $cat)
+                                            <option value="{{$cat->id}}" >{{$cat->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
                                 <button type="submit" class="btn btn-success" >Enviar</button>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\product_categorys;
+use App\sub_categorys;
 use Illuminate\Http\Request;
 
 class product_categorysController extends Controller
@@ -14,8 +15,9 @@ class product_categorysController extends Controller
      */
     public function index()
     {
-        $category = product_categorys::paginate(4);
+        $category = product_categorys::all();
         return  view('admin/category', compact('category') );
+
     }
 
     /**

@@ -10,23 +10,17 @@
     Auth::routes(['verify' => true]);
     Route::group(['middleware' => 'verified', 'auth'], function () {
 
+        Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+        Route::resource('/product', 'ProductController');
+
+        Route::resource('/product-img', 'Product_imgController');
+        Route::resource('/product-category', 'Product_categorysController');
+
         Route::resource('/admin/blog', 'BlogController');
         Route::view('/users','user/users')->name('users');
     });
 
-    //esto lo saque del midlleware de verificacion por que elimine la base de datos
-    // y me tocaba volver a verificarme
-    //subir imagenes del producto
-    Route::resource('/product', 'ProductController');
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-    Route::resource('/product-img', 'Product_imgController');
-    Route::resource('/product-category', 'Product_categorysController');
-    Route::resource('/sub-category', 'sub_categorysController');
 
-
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-
-    Route::view('/profile','admin/profile')->name('profileadmin');
     Route::view('/blogAdmin','admin/blogAdmin')->name('blogAdmin');
     //FIN ADMINISTRADOR
 
