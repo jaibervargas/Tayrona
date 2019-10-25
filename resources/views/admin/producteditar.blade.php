@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-md-12">
         <!-- Horizontal Form -->
-        <div class="box box-info">
+        <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Producto: {{$productactualizar->name}}</h3>
                 <!--<div class="box-tools pull-right">
@@ -68,7 +68,7 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="box box-success">
+        <div class="box ">
             <div class="box-header with-border">
                 <h3 class="box-title">IMAGENES DEL PRODUCTO :  {{$productactualizar->name}}</h3>
                 <div class="box-tools pull-right">
@@ -76,18 +76,58 @@
                         <i class="fa fa-plus">    New Image</i>
                     </a>
                 </div>
-                @foreach($img as $im)
+                <form action="" class="form-horizontal" method="post" autocomplete="off" id="form-general">
+                    @csrf
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead >
+                            <tr >
+                                <th class="text-center">IMAGEN</th>
+                                <th class="text-center" >ACCIONES</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                    <img src="{{asset($im->url)}}" alt="" style="width:100px  ">
-                
-                 @endforeach
+                            <tr>
+
+                                @foreach($img as $im)
+                                    <tr>
+                                        <td class="text-center">
+                                            <img src="{{asset($im->url)}}" alt="" style="width:100px ">
+                                        </td>
+                                        <td class="td-actions text-center ">
+                                            <a  type="button"  data-toggle="modal" data-target="#modal4"><button   class="btn btn-round btn-group btn-success btn-icon" title="Modificar producto">
+                                                    <i class="fa fa-fw fa-edit "></i>
+                                                </button></a>
+                                            <form action="{{Route('product-img.destroy',$im->id)}}" method="post"  class="d-inline btn-group">
+                                                @csrf
+                                                @method('delete')
+                                                <button  type="submit" class="btn btn-round btn-danger btn-icon" data-toggle="tooltip" title="Eliminar producto">
+                                                    <i class="fa fa-fw fa-trash "></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <div class="col-lg-3"></div>
+                        <div class="col lg 6">
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-6">
-        <div class="box box-success">
+        <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Categoria del producto:   {{$productactualizar->name}}</h3>
                 <div class="box-tools pull-right">
@@ -137,7 +177,7 @@
     </div>
 
     <div class="col-lg-6">
-        <div class="box box-success">
+        <div class="box">
             <div class="box-header with-border">
                 <h3 class="box-title">Sub categorias del producto:   {{$productactualizar->name}}</h3>
                 <div class="box-tools pull-right">
@@ -289,155 +329,38 @@
         </div>
     </div>
 </div>
-<!--<div class="modal fade" id="modal3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal3">referencias</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                    <spam aria-hidden="true">&times;</spam>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name"  class="col-form-label">Nombre</label>
-                        <input type="text" name="name" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-description" class="col-form-label">Descripcion</label>
-                        <input type="text" name="descripcion" class="form-control" id="recipient-description">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-" class="col-form-label">Categoria</label>
-                        <select name="categoria" id="recipient-category" class="form-control" >
-                            <option value="" ></option>
-                            <option value="perros" >Perros</option>
-                            <option value="gatos" >Gatos</option>
-                            <option value="otras mascotas" >Otras Mascotas</option>
-                            <option value="accesorios" >Accesorios</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-precio" class="col-form-label">Valor</label>
-                        <input type="text" name="precio" class="form-control" id="recipient-precio">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-cantidad" class="col-form-label">Cantidad</label>
-                        <input type="text" name="cantidad" class="form-control" id="recipient-cantidad">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-                        <button type="submit" class="btn btn-primary" >Enviar</button>
-                    </div>
-                </form>
-            </div>
 
-
-        </div>
-    </div>
-</div>
-
+<!-- Modal imagenes update-->
 <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modal4">estado</h5>
+                <h5 class="modal-title" id="modal">Modificar imagen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="close">
                     <spam aria-hidden="true">&times;</spam>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name"  class="col-form-label">Nombre</label>
-                        <input type="text" name="name" class="form-control" id="recipient-name">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form action="{{asset('product-img.update')}}}" method="post"  enctype="multipart/form-data">
+
+                            @csrf
+
+                            <input type="hidden" name="productid" value="{{$productactualizar->id}}">
+                            <input type="file" name="avatar">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+                                <button type="submit" class="btn btn-primary" >Enviar</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="recipient-description" class="col-form-label">Descripcion</label>
-                        <input type="text" name="descripcion" class="form-control" id="recipient-description">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-" class="col-form-label">Categoria</label>
-                        <select name="categoria" id="recipient-category" class="form-control" >
-                            <option value="" ></option>
-                            <option value="perros" >Perros</option>
-                            <option value="gatos" >Gatos</option>
-                            <option value="otras mascotas" >Otras Mascotas</option>
-                            <option value="accesorios" >Accesorios</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-precio" class="col-form-label">Valor</label>
-                        <input type="text" name="precio" class="form-control" id="recipient-precio">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-cantidad" class="col-form-label">Cantidad</label>
-                        <input type="text" name="cantidad" class="form-control" id="recipient-cantidad">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-                        <button type="submit" class="btn btn-primary" >Enviar</button>
-                    </div>
-                </form>
+                </div>
+
             </div>
-
-
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal5" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal5">new description</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                    <spam aria-hidden="true">&times;</spam>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="recipient-name"  class="col-form-label">Nombre</label>
-                        <input type="text" name="name" class="form-control" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-description" class="col-form-label">Descripcion</label>
-                        <input type="text" name="descripcion" class="form-control" id="recipient-description">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-" class="col-form-label">Categoria</label>
-                        <select name="categoria" id="recipient-category" class="form-control" >
-                            <option value="" ></option>
-                            <option value="perros" >Perros</option>
-                            <option value="gatos" >Gatos</option>
-                            <option value="otras mascotas" >Otras Mascotas</option>
-                            <option value="accesorios" >Accesorios</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-precio" class="col-form-label">Valor</label>
-                        <input type="text" name="precio" class="form-control" id="recipient-precio">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-cantidad" class="col-form-label">Cantidad</label>
-                        <input type="text" name="cantidad" class="form-control" id="recipient-cantidad">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-                        <button type="submit" class="btn btn-primary" >Enviar</button>
-                    </div>
-                </form>
-            </div>
-
-
-        </div>
-    </div>
-</div>
--->
 
 
 @endsection

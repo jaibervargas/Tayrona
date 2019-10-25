@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\product_img;
-use App\productos;
-use Faker\Provider\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -82,7 +80,11 @@ class product_imgController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $imgupdate = product_img::findOrFail($id);
+        $imgupdate->url=$request->avatar;
+        $imgupdate->save();
+        return $id;
     }
 
     /**
@@ -93,6 +95,9 @@ class product_imgController extends Controller
      */
     public function destroy($id)
     {
-        //
+        product_img::destroy($id);
+        //$imgdelete = product_img::find($id);
+        //$imgdelete->delete();
+        return back();
     }
 }

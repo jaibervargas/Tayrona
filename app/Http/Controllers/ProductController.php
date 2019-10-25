@@ -90,7 +90,7 @@ class ProductController extends Controller
         $productupdate = productos::findOrFail($id);
         $productupdate->name = $request->name;
         $productupdate->descripcion = $request->descripcion;
-        $productupdate->product_status_id  = $request->product_status_id ;
+        $productupdate->product_status_id  = $request->product_status_id;
         $productupdate->precio = $request->precio;
         $productupdate->save();
         return back();
@@ -104,8 +104,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $producteliminar = productos::findOrFail($id);
-        $producteliminar->delete();
+        $producteliminar = productos::find($id);
+        $producteliminar->delete()  ;
         return back()->with ('eliminar','el producto ha sido eliminado');
     }
 }
